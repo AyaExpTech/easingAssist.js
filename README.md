@@ -1,10 +1,10 @@
-# repository-template
+# easingAssist.js
 
-リポジトリのテンプレートです。
+JavaScriptにおいて、イージングの計算部分を肩代わりするライブラリです。
 
 ## 使い方
 
-- コピーして使ってください
+- jsDelivrとかで参照すればいいんじゃないでしょうか
 
 ## 利用規約
 
