@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>easing assist test</title>
+    <script src="script.js"></script>
+</head>
+
+<body style="font-size: 14px">
+    <p>
+        <span>確認するイージング</span><select></select> / <span>段階数</span><input value="25" step="1"><br>
+        <span>※inは加速、outは減速</span>
+    </p>
+    <table style="text-align:center;line-height:1em;font-family:monospace;">
+        <thead style="background:#dde">
+            <tr>
+                <th>In</th>
+                <th>Out</th>
+            </tr>
+        </thead>
+        <tbody style="background:#eef">
+        </tbody>
+    </table>
+    <script>
+        const $ = (s) => document.querySelector(s);
+        // select要素に選択肢を追加
+        let options = "";
+        _easing.getList().forEach(n => {
+            options += `<option>${n}</option>`
+        });
+        $("select").innerHTML = options;
+        // select変更時の動作を設定
+        const update = () => {
+            // tr要素を追加
+            let trs = "";
+            let spl = +$("input").value;
+            for (let i = 0; i <= spl; i++) {
+                trs += `<tr><td style="width:100px">${(1 / spl * i).toFixed(6)}</td><td style="width:500px">0.000000</td></tr>`
+            }
+            $("tbody").innerHTML = trs;
+            //計算して反映
+            const easeFn = _easing[$("select").options[$("select").selectedIndex].value];
+            for (let i = 1; i <= document.querySelectorAll("tbody>tr").length; i++) {
+                const e = easeFn(+$(`tbody>tr:nth-child(${i})>td:nth-child(1)`).textContent);
+                $(`tbody>tr:nth-child(${i})>td:nth-child(2)`).textContent = e.toFixed(6);
+                $(`tbody>tr:nth-child(${i})>td:nth-child(2)`).style.background = `linear-gradient(to right, #e0e0f0 ${e * 100}%, #eef ${e * 100}%)`;
+            }
+        };
+        update("liner");
+        $("select").onchange = update;
+        $("input").onchange = update;
+    </script>
+</body>
+
+</html>

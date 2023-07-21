@@ -15,3 +15,7 @@ Ayasaka-Koto
 Follow one of the following licenses.
 
 - "AeTOS for Everyone" …… https://axtech.dev/license/#aetos-for-everyone
+
+## クレジット
+
+イージング関数は[easings.net](https://easings.net/ja)様を一部参考にしました
